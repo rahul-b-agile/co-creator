@@ -5,12 +5,39 @@ import Footer from '../../components/Footer/Footer'
 import Link from 'next/link'
 
 export const getStaticProps: GetStaticProps = async () => {
-  const res = await fetch(
-    'http://localhost:1337/api/hire-developers?populate=*'
-  )
+  const fetchParams = {
+    method: 'POST',
+
+    headers: {
+      'content-type': 'application/json',
+    },
+    body: JSON.stringify({
+      query: `query {
+        hireDevelopers {
+          data {
+            id
+            attributes {
+              question
+              options {
+                type
+                option
+                name
+              }
+            }
+          }
+        }
+      }
+     `,
+    }),
+  }
+
+  const res = await fetch('http://localhost:1337/graphql', fetchParams)
+
   const data = await res.json()
 
-  const sendData = data.data[3]
+  // console.log(data.data.hireDevelopers.data[0])
+
+  const sendData = data.data.hireDevelopers.data[3]
   return { props: { sendData } }
 }
 
@@ -40,8 +67,8 @@ export default function HirePage5({ sendData }: any) {
             <div className="flex">
               <Link href="/Hire-page-4">
                 <button>
-                  <span className="material-symbols-outlined rotate-45 -rotate-90 button">
-                    change_history
+                  <span className="material-symbols-outlined text-gray-400 text-2xl rotate-180">
+                    play_arrow
                   </span>
                 </button>
               </Link>
