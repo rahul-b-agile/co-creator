@@ -1,11 +1,8 @@
-import CheckBox from '../../components/CheckBox/Checkbox'
-import style from '../../styles/HirePage2.module.css'
-
 import { GetStaticProps } from 'next'
 import Navbar from '../../components/Navbar/Navbar'
 import Footer from '../../components/Footer/Footer'
 import Link from 'next/link'
-import RadioButton from '../../components/RadioButton/Radiobutton'
+import RadioButton from '../../components/RadioButton/RadioButton'
 
 export const getStaticProps: GetStaticProps = async () => {
   const fetchParams = {
@@ -68,7 +65,7 @@ export default function HirePage3({ sendData }: any) {
             <div className="flex">
               <Link href="/Hire-page-2">
                 <button>
-                <span className="material-symbols-outlined text-gray-400 text-2xl rotate-180">
+                  <span className="material-symbols-outlined text-gray-400 text-2xl rotate-180">
                     play_arrow
                   </span>
                 </button>

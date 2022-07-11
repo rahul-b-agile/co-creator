@@ -1,11 +1,13 @@
 // import styles from "./Cards.module.css"
+import Button from '../Button/Button'
+
 const Navbar = () => {
   return (
     <div className="border-slate-100 shadow-md ">
       <nav className="bg-white border-gray-200 px-2 sm:px-4 py-2.5 rounded dark:bg-gray-800 w-5/6 m-auto">
         <div className="container grid grid-cols-5 gap-4 items-center mx-auto">
           <div className="col-span-2">
-            <span className="self-center text-xl text-blue-700 sm:ml-4 md:ml-0 lg:ml-0 font-semibold whitespace-nowrap dark:text-white">
+            <span className="self-center text-xl text-blue-500 sm:ml-4 md:ml-0 lg:ml-0  whitespace-nowrap dark:text-white">
               CO-CREATOR
             </span>
           </div>
@@ -54,15 +56,8 @@ const Navbar = () => {
                 </li>
                 <li>
                   <div className="flex md:order-2">
-                    <button className="bg-white ml-2 hover:bg-gray-100 text-gray-800 font-semibold py-2 px-2 border border-blue-400 rounded shadow">
-                      Log in
-                    </button>
-                    <button
-                      type="button"
-                      className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded ml-2 text-sm px-2  py-2.5 text-center mr-3 md:mr-0 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-                    >
-                      Sign up
-                    </button>
+                    <Button name="Login" path="/login" />
+                    <Button name="SignUp" path="/signup" />
                   </div>
                 </li>
               </ul>
