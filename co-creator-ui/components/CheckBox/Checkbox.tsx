@@ -1,4 +1,11 @@
-const CheckBox = (props: any) => {
+interface checkoptions {
+  data: {
+    type: string
+    option: string
+  }
+}
+
+const CheckBox = (props: checkoptions) => {
   //   console.log(props)
 
   return (

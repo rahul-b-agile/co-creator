@@ -1,5 +1,6 @@
 // import styles from "./Cards.module.css"
 import Button from '../Button/Button'
+import { NextPage } from 'next'
 
 const Navbar = () => {
   return (

@@ -1,7 +1,12 @@
 import React from 'react'
 import Link from 'next/link'
 
-export default function Button(props: any) {
+interface buttonName {
+  name: string
+  path: string
+}
+
+export default function Button(props: buttonName) {
   var className: string = ''
 
   console.log(props, 'button')

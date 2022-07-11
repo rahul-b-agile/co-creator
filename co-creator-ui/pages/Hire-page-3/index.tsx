@@ -79,6 +79,7 @@ export default function HirePage3({ sendData }: any) {
 
         {sendData.attributes.options.map((data: any) => (
           <div>
+            {console.log(data, 'radiochcek' )}
             <RadioButton data={data} />
           </div>
         ))}

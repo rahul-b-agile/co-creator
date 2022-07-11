@@ -1,11 +1,19 @@
 import React from 'react'
 import Button from '../Button/Button'
 
-export default function Footer(props: any) {
-  console.log(props.value)
+interface buttonType {
+  name: string
+  path: string
+}
+interface footerType {
+  value: { name: string; path: string }[]
+}
+
+export default function Footer(props: footerType) {
+  console.log(props.value, 'footer')
   return (
     <div className="flex">
-      {props.value?.map((data: any) => (
+      {props.value?.map((data: buttonType) => (
         <Button name={data.name} path={data.path} />
       ))}
     </div>

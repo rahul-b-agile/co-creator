@@ -1,6 +1,4 @@
 import CheckBox from '../../components/CheckBox/Checkbox'
-import style from '../../styles/HirePage2.module.css'
-
 import { GetStaticProps } from 'next'
 import Navbar from '../../components/Navbar/Navbar'
 import Footer from '../../components/Footer/Footer'

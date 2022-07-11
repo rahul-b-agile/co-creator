@@ -15,15 +15,15 @@
   ],
   "rootMainFiles": [],
   "pages": {
-    "/Hire-page-1": [
+    "/Hire-page-2": [
       "static/chunks/webpack.js",
       "static/chunks/main.js",
-      "static/chunks/pages/Hire-page-1.js"
+      "static/chunks/pages/Hire-page-2.js"
     ],
-    "/Hire-page-5": [
+    "/Hire-page-3": [
       "static/chunks/webpack.js",
       "static/chunks/main.js",
-      "static/chunks/pages/Hire-page-5.js"
+      "static/chunks/pages/Hire-page-3.js"
     ],
     "/_app": [
       "static/chunks/webpack.js",

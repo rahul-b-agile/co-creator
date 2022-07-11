@@ -81,7 +81,7 @@ export default function HirePage2({ sendData }: any) {
         </div>
 
         {sendData.attributes.options.map((data: any) => (
-          <div>
+          <div>{console.log(data, 'radio check')}
             <CheckBox data={data} />
           </div>
         ))}
