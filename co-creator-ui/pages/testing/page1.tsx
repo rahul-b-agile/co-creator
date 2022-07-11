@@ -1,11 +1,11 @@
 import type { NextPage } from 'next'
 import { useState } from "react"
-import Navbar from "../components/Navbar/Navbar"
+import Navbar from "../../components/Navbar/Navbar"
 import Link from "next/link"
-import Cards from '../components/Cards/Cards'
-import Card from '../components/Cards/Cards'
-import Input from '../components/Input/Input'
-import Button from '../components/Button/Button'
+
+import Card from '../../components/Cards/Cards'
+import Input from '../../components/Input/Input'
+import Button from '../../components/Button/Button'
 export const getStaticProps = async () => {
 
   const fetchParams = {
