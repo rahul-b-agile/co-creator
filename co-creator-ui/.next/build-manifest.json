@@ -20,20 +20,10 @@
       "static/chunks/main.js",
       "static/chunks/pages/Hire-page-1.js"
     ],
-    "/Hire-page-2": [
+    "/Hire-page-5": [
       "static/chunks/webpack.js",
       "static/chunks/main.js",
-      "static/chunks/pages/Hire-page-2.js"
-    ],
-    "/Hire-page-3": [
-      "static/chunks/webpack.js",
-      "static/chunks/main.js",
-      "static/chunks/pages/Hire-page-3.js"
-    ],
-    "/Hire-page-4": [
-      "static/chunks/webpack.js",
-      "static/chunks/main.js",
-      "static/chunks/pages/Hire-page-4.js"
+      "static/chunks/pages/Hire-page-5.js"
     ],
     "/_app": [
       "static/chunks/webpack.js",

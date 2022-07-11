@@ -1,11 +1,10 @@
-import type { NextPage } from 'next'
+import type { NextPage, GetStaticProps } from 'next'
 import { useState } from 'react'
 import Navbar from '../../components/Navbar/Navbar'
 import Footer from '../../components/Footer/Footer'
-
 import Card from '../../components/Cards/Cards'
 import Input from '../../components/Input/Input'
-export const getStaticProps = async () => {
+export const getStaticProps: GetStaticProps = async () => {
   const fetchParams = {
     method: 'POST',
     headers: {
@@ -74,7 +73,7 @@ const Home: NextPage = ({ data }: any) => {
             <div className="grid justify-items-center">
               {' '}
               <div className="border-2 flex-none px-3 py-1 rounded-full text-gray-400">
-                {/* <Button props="step1/6"></Button> */} step1/6
+                step1/6
               </div>
             </div>
           </div>
@@ -88,7 +87,7 @@ const Home: NextPage = ({ data }: any) => {
         </div>
 
         <div className="grid grid-cols-4 gap-1 w-5/6 ">
-          {data.data.skills.data?.map((data: any, i: any) => (
+          {data.data.skills.data?.map((data: any, i: number) => (
             <>
               {console.log(data)}
               {i !== 0 ? (

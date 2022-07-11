@@ -1,9 +1,5 @@
 {
   "/_app": "pages/_app.js",
   "/_error": "pages/_error.js",
-  "/_document": "pages/_document.js",
-  "/Hire-page-1": "pages/Hire-page-1.js",
-  "/Hire-page-2": "pages/Hire-page-2.js",
-  "/Hire-page-4": "pages/Hire-page-4.js",
-  "/Hire-page-3": "pages/Hire-page-3.js"
+  "/_document": "pages/_document.js"
 }
