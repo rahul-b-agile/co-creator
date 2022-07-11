@@ -1,29 +1,37 @@
-interface props {
-    props: string
+import React from 'react'
+import Link from 'next/link'
+
+export default function Button(props: any) {
+  var className: string = ''
+
+  console.log(props, 'button')
+
+  switch (props.name) {
+    case 'Cancel':
+      className = 'bg-white ml-2  text-gray-400  py-2 px-2 border-0  rounded '
+      break
+    case 'Continue':
+      className =
+        'text-white bg-blue-700  focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded ml-2 text-sm px-3 mt-2  py-1 text-center mr-3 md:mr-0 bg-blue-500 dark:hover:bg-blue-700 dark:focus:ring-blue-800'
+      break
+    case 'Login':
+      className =
+        'bg-white ml-2 hover:bg-gray-100 text-gray-800  py-2 px-5 border border-blue-400 rounded shadow'
+      break
+    case 'SignUp':
+      className =
+        'text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300  rounded ml-2 text-sm px-5  py-2 text-center mr-3 md:mr-0 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800'
+      break
+
+    default:
+      break
+  }
+
+  return (
+    <div>
+      <Link href={props.path}>
+        <input type="button" value={props.name} className={className} />
+      </Link>
+    </div>
+  )
 }
-
-const Button = (props: props) => {
-
-
-    return (
-        <>
-            {props.props == "cancel" ? <button className="bg-white ml-2 hover:bg-gray-100 text-gray-400 font-semibold py-2 px-4  ">
-                Cancel
-            </button> : null}
-
-            { props.props == "continue" ? <button type="button" className="text-white bg-blue-500  hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded ml-2 text-sm px-5 py-2.5 text-center mr-3 md:mr-0 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Continue</button>:null}
-
-{props.props=="login"?<button className="bg-white ml-2 hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-blue-400 rounded shadow">
-                                            Log in
-                                        </button>:null}
-{props.props=="signup"? <button type="button" className="text-white bg-blue-500 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded ml-2 text-sm px-5 py-2.5 text-center mr-3 md:mr-0 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Sign up</button>:null}
-{props.props=="step1/6"?<button className=" ml-15 hover:bg-blue-700 text-gray-400 border border-gray-400 py-2 px-4 rounded-full">
-              step 1/6
-              
-            </button> : null}
-
-        </>
-
-    )
-}
-export default Button;
