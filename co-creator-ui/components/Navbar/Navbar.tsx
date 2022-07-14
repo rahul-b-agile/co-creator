@@ -1,6 +1,6 @@
-// import styles from "./Cards.module.css"
 import Button from '../Button/Button'
 import { NextPage } from 'next'
+import Link from 'next/link'
 
 const Navbar = () => {
   return (
@@ -8,9 +8,11 @@ const Navbar = () => {
       <nav className="bg-white border-gray-200 px-2 sm:px-4 py-2.5 rounded dark:bg-gray-800 w-5/6 m-auto">
         <div className="container grid grid-cols-5 gap-4 items-center mx-auto">
           <div className="col-span-2">
-            <span className="self-center text-xl text-blue-500 sm:ml-4 md:ml-0 lg:ml-0  whitespace-nowrap dark:text-white">
-              CO-CREATOR
-            </span>
+            <Link href="/">
+              <span className="self-center text-xl text-blue-500 sm:ml-4 md:ml-0 lg:ml-0  whitespace-nowrap dark:text-white pointer">
+                CO-CREATOR
+              </span>
+            </Link>
           </div>
           <div className="col-span-3">
             <div
@@ -57,8 +59,8 @@ const Navbar = () => {
                 </li>
                 <li>
                   <div className="flex md:order-2">
-                    <Button name="Login" path="/login" />
-                    <Button name="SignUp" path="/signup" />
+                    <Button name="Login" path="/login" func={null} />
+                    <Button name="SignUp" path="/signup" func={null} />
                   </div>
                 </li>
               </ul>

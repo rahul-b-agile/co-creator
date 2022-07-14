@@ -5,7 +5,7 @@ interface props {
 }
 
 const Card = ({ skills, src }: props) => {
-  console.log(skills, src)
+  // console.log(skills, src)
   return (
     <div className="sm:w-32 lg:w-56 ml-1 pl-3 ">
       <div className="flex flex-row mt-5 p-1 items-center rounded-md border-slate-100 shadow-md">

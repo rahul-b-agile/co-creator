@@ -4,9 +4,10 @@ import Button from '../Button/Button'
 interface buttonType {
   name: string
   path: string
+  func: void
 }
 interface footerType {
-  value: { name: string; path: string }[]
+  value: { name: string; path: string; func: any }[]
 }
 
 export default function Footer(props: footerType) {
@@ -14,7 +15,7 @@ export default function Footer(props: footerType) {
   return (
     <div className="flex">
       {props.value?.map((data: buttonType) => (
-        <Button name={data.name} path={data.path} />
+        <Button name={data.name} path={data.path} func={data.func} />
       ))}
     </div>
   )
