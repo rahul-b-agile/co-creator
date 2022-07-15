@@ -1,8 +1,15 @@
 import type { NextPage } from 'next'
-import { useState } from 'react'
+import { useState , useEffect } from 'react'
 import Navbar from '../../components/Navbar/Navbar'
 import Footer from '../../components/Footer/Footer'
+type props = {
+  
+  skillname:string,
+  skillimage:string,
+  sk:any,
+  setSk:any
 
+}
 import Card from '../../components/Cards/Cards'
 import Input from '../../components/Input/Input'
 export const getStaticProps = async () => {
@@ -42,7 +49,7 @@ export const getStaticProps = async () => {
   }
 }
 
-const Home: NextPage = ({ data }: any) => {
+const Home: NextPage = ({ data }:any) => {
   const footerName = [
     {
       name: 'Cancel',
@@ -58,7 +65,22 @@ const Home: NextPage = ({ data }: any) => {
   )
 
   const [url, setUrl] = useState('http://localhost:1337')
+  const [skill , setSkill]=useState([])
+  console.log(skill)
   console.log(data)
+
+  const skillss = (data:any) =>
+  {
+
+    setSkill([...skill , data])
+
+      console.log("data" , data)
+  }
+ 
+
+
+
+
 
   return (
     <>
@@ -93,7 +115,7 @@ const Home: NextPage = ({ data }: any) => {
               {console.log(data)}
               {i !== 0 ? (
                 <>
-                  <Card
+                  <Card sk={skill} setSk={setSkill} skillss={skillss}
                     skills={data.attributes.skillname}
                     src={
                       url + data.attributes.skillimage?.data[0]?.attributes.url
@@ -101,19 +123,19 @@ const Home: NextPage = ({ data }: any) => {
                   ></Card>
                 </>
               ) : (
-                <Card skills={data.attributes.skillname} src={undefined}></Card>
+                <Card sk={skill} setSk={setSkill} skillss={skillss} skills={data.attributes.skillname} src={undefined}></Card>
               )}
             </>
           ))}
         </div>
         <div className=" ml-4 mt-5 w-5/6 m-auto">
-          <Input props="skills"></Input>
+          <Input props="skills" sk={skill}></Input>
         </div>
         <div className=" ml-4 mt-5 w-5/6 m-auto">
-          <Input props="names"></Input>
+          <Input props="names" sk={skill}></Input>
         </div>
         <div className=" ml-4 mt-5 w-5/6 m-auto">
-          <Input props="email"></Input>
+          <Input props="email" sk={skill}></Input>
         </div>
 
         <div className="ml-2 mt-4">

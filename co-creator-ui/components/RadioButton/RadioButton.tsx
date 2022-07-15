@@ -1,5 +1,15 @@
-const CheckBox = (props: any) => {
-    //   console.log(props)
+
+interface props
+{data:{
+  type:string,
+  name:string,
+  option:string
+}
+  
+}
+
+const CheckBox = (props:props) => {
+    console.log("props",props)
   
     return (
       <div className="flex space-x-4 my-4 ml-4">

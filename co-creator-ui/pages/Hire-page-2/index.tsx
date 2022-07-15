@@ -43,7 +43,7 @@ export const getStaticProps: GetStaticProps = async () => {
   return { props: { sendData } }
 }
 
-export default function HirePage2({ sendData }: any) {
+export default function HirePage2({ sendData }: number) {
   console.log(sendData)
   const footerName = [
     {
@@ -80,8 +80,9 @@ export default function HirePage2({ sendData }: any) {
           </div>
         </div>
 
-        {sendData.attributes.options.map((data: any) => (
+        {sendData.attributes.options.map((data) => (
           <div>
+            {console.log("Checkbox",data)}
             <CheckBox data={data} />
           </div>
         ))}

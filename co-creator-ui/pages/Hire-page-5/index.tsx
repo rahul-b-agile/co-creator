@@ -79,7 +79,7 @@ export default function HirePage5({ sendData }: any) {
           </div>
         </div>
 
-        {sendData.attributes.options.map((data: any) => (
+        {sendData.attributes.options.map((data: any ) => (
           <div>
             <CheckBox data={data} />
           </div>
