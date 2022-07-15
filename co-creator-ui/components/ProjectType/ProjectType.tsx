@@ -1,20 +1,19 @@
-import Link from 'next/link'
 import React from 'react'
 import CheckBox from '../CheckBox/Checkbox'
 import Footer from '../Footer/Footer'
 
 export default function ProjectType(props: any) {
   const sendData = props.data
-  const footerName = [
-    {
-      name: 'Cancel',
-      path: '/',
-    },
-    {
-      name: 'Continue',
-      path: '/Hire-page-3',
-    },
-  ]
+  //   const footerName = [
+  //     {
+  //       name: 'Cancel',
+  //       path: '/',
+  //     },
+  //     {
+  //       name: 'Continue',
+  //       path: '/Hire-page-3',
+  //     },
+  //   ]
   return (
     <div>
       <div className="w-4/5 mx-auto">
@@ -24,13 +23,11 @@ export default function ProjectType(props: any) {
           </div>
           <div className="mr-72">
             <div className="flex">
-              {/* <Link href="/Hire-page-1"> */}
               <button onClick={props.function}>
                 <span className="material-symbols-outlined text-gray-400 text-2xl rotate-180">
                   play_arrow
                 </span>
               </button>
-              {/* </Link> */}
 
               <ul></ul>
               <div className="border-2 flex-none px-3 py-1 rounded-full text-gray-400">

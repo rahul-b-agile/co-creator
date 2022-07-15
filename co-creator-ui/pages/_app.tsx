@@ -1,9 +1,9 @@
 import '../styles/globals.css'
-import type { AppProps } from 'next/app'
+import { AppProps } from 'next/app'
 import Head from 'next/head'
 import Layout from '../components/Layout/Layout'
 
-function MyApp({ Component, pageProps }: AppProps) {
+function MyApp({ Component, pageProps }: any) {
   return (
     <div>
       <Head>
@@ -17,13 +17,6 @@ function MyApp({ Component, pageProps }: AppProps) {
       </Layout>
     </div>
   )
-}
-
-{
-  /* <Layout>
-<Component {...pageProps} />
-</Layout>
-); */
 }
 
 export default MyApp

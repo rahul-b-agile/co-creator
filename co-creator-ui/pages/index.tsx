@@ -98,6 +98,11 @@ export const getStaticProps: GetStaticProps = async () => {
 // Home page to Display all the records in Single page
 const Home: NextPage = ({ fullData }: any) => {
   const [particularData, setParticularData] = useState<number>(0)
+
+  const [selectedData, setSelectedData] = useState({
+    checkBoxData: [],
+  })
+
   const data = fullData[1]
 
   // Function for forward navigation in single page
@@ -111,10 +116,16 @@ const Home: NextPage = ({ fullData }: any) => {
   }
 
   // function for reverse navigation in single page
-  const cancelFunction = () => {
+  const reverseNavigation = () => {
     setParticularData(particularData - 1)
     console.log('cancel function')
   }
+
+  const cancelFunction = () => {
+    setParticularData(0)
+  }
+
+  const OnChange = (e: any) => {}
 
   //value for the Footer component
   const footerName = [
@@ -135,20 +146,19 @@ const Home: NextPage = ({ fullData }: any) => {
 
       {particularData == 0 && <Skill data={fullData[0]} />}
       {particularData == 1 && (
-        <ProjectType data={data[0]} function={cancelFunction} />
+        <ProjectType data={data[0]} function={reverseNavigation} />
       )}
       {particularData == 2 && (
-        <Duration data={data[1]} function={cancelFunction} />
+        <Duration data={data[1]} function={reverseNavigation} />
       )}
       {particularData == 3 && (
-        <WorkingModel data={data[2]} function={cancelFunction} />
+        <WorkingModel data={data[2]} function={reverseNavigation} />
       )}
       {particularData == 4 && (
-        <Experience data={data[3]} function={cancelFunction} />
+        <Experience data={data[3]} function={reverseNavigation} />
       )}
 
       <div className="w-5/6 m-auto">
-        
         {/* Footer component reusable component for the button in the bottom */}
         <Footer value={footerName} />
       </div>

@@ -19,7 +19,7 @@ export default function Button(props: buttonName) {
       break
     case 'Continue':
       className =
-        'text-white bg-blue-700  focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded ml-2 text-sm px-3 mt-2  py-1 text-center mr-3 md:mr-0 bg-blue-500 dark:hover:bg-blue-700 dark:focus:ring-blue-800'
+        'text-white bg-blue-700  focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded ml-2 text-sm px-3 mt-2  py-1 text-center mr-3 md:mr-0 dark:hover:bg-blue-700 dark:focus:ring-blue-800'
       condition = false
       break
     case 'Login':
@@ -53,7 +53,7 @@ export default function Button(props: buttonName) {
             type="button"
             value={props.name}
             className={className}
-            // onClick={props.func}
+            onClick={props.func}
           />
         </Link>
       ) : (
