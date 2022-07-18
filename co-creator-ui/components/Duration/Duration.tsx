@@ -1,20 +1,9 @@
-import Link from 'next/link'
 import React from 'react'
-import Footer from '../Footer/Footer'
-import RadioButton from '../RadioButton/RadioButton'
+import RadioButton from '../Widgets/RadioButton/RadioButton'
 
-export default function Duration(props: any) {
-  const sendData = props.data
-  const footerName = [
-    {
-      name: 'Cancel',
-      path: '/',
-    },
-    {
-      name: 'Continue',
-      path: '/Hire-page-4',
-    },
-  ]
+export default function Duration({ data, functionDef }: any) {
+  const sendData = data
+
   return (
     <div>
       <div className="w-4/5 mx-auto">
@@ -24,7 +13,11 @@ export default function Duration(props: any) {
           </div>
           <div className="mr-72">
             <div className="flex">
-              <button onClick={props.function}>
+              <button
+                onClick={() => {
+                  functionDef(data)
+                }}
+              >
                 <span className="material-symbols-outlined text-gray-400 text-2xl rotate-180">
                   play_arrow
                 </span>
@@ -44,7 +37,6 @@ export default function Duration(props: any) {
           </div>
         ))}
 
-        {/* <Footer value={footerName} /> */}
       </div>
     </div>
   )

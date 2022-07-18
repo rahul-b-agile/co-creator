@@ -1,19 +1,16 @@
 import React from 'react'
-import CheckBox from '../CheckBox/Checkbox'
-import Footer from '../Footer/Footer'
+import CheckBox from '../Widgets/CheckBox/Checkbox'
+import Button from '../Widgets/Button/Button'
 
-export default function ProjectType(props: any) {
-  const sendData = props.data
-  //   const footerName = [
-  //     {
-  //       name: 'Cancel',
-  //       path: '/',
-  //     },
-  //     {
-  //       name: 'Continue',
-  //       path: '/Hire-page-3',
-  //     },
-  //   ]
+export default function ProjectType({
+  data,
+  functionPre,
+  functionFor,
+  functionCancel,
+}: any) {
+  const sendData = data
+  var str = 'name'
+
   return (
     <div>
       <div className="w-4/5 mx-auto">
@@ -23,7 +20,11 @@ export default function ProjectType(props: any) {
           </div>
           <div className="mr-72">
             <div className="flex">
-              <button onClick={props.function}>
+              <button
+                onClick={() => {
+                  functionPre(data)
+                }}
+              >
                 <span className="material-symbols-outlined text-gray-400 text-2xl rotate-180">
                   play_arrow
                 </span>
@@ -43,6 +44,22 @@ export default function ProjectType(props: any) {
           </div>
         ))}
 
+        <div className="flex">
+          <Button
+            value="Cancel"
+            name="disabled"
+            path="/"
+            textForm=""
+            func={functionCancel}
+          />
+          <Button
+            value="Continue"
+            name="blue"
+            path=""
+            textForm="textData"
+            func={functionFor}
+          />
+        </div>
         {/* <Footer value={footerName} /> */}
       </div>
     </div>

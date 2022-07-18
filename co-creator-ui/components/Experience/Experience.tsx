@@ -1,20 +1,9 @@
-import Link from 'next/link'
 import React from 'react'
-import CheckBox from '../CheckBox/Checkbox'
-import Footer from '../Footer/Footer'
+import CheckBox from '../Widgets/CheckBox/Checkbox'
 
-export default function Experience(props: any) {
-  const sendData = props.data
-  const footerName = [
-    {
-      name: 'Cancel',
-      path: '/',
-    },
-    {
-      name: 'Continue',
-      path: '/Hire-page-6',
-    },
-  ]
+export default function Experience({ data, functionDef }: any) {
+  const sendData = data
+
   return (
     <div>
       <div className="w-4/5 mx-auto">
@@ -24,7 +13,11 @@ export default function Experience(props: any) {
           </div>
           <div className="mr-72">
             <div className="flex">
-              <button onClick={props.function}>
+              <button
+                onClick={() => {
+                  functionDef()
+                }}
+              >
                 <span className="material-symbols-outlined text-gray-400 text-2xl rotate-180">
                   play_arrow
                 </span>
@@ -42,8 +35,6 @@ export default function Experience(props: any) {
             <CheckBox data={data} />
           </div>
         ))}
-
-        {/* <Footer value={footerName} /> */}
       </div>
     </div>
   )

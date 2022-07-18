@@ -1,4 +1,4 @@
-import Button from '../Button/Button'
+import Button from '../Widgets/Button/Button'
 import { NextPage } from 'next'
 import Link from 'next/link'
 
@@ -59,8 +59,20 @@ const Navbar = () => {
                 </li>
                 <li>
                   <div className="flex md:order-2">
-                    <Button name="Login" path="/login" func={null} />
-                    <Button name="SignUp" path="/signup" func={null} />
+                    <Button
+                      name="white"
+                      value="LogIn"
+                      path="/login"
+                      textForm=""
+                      func={null}
+                    />
+                    <Button
+                      name="blue"
+                      value="SignUp"
+                      path="/signup"
+                      textForm=""
+                      func={null}
+                    />
                   </div>
                 </li>
               </ul>

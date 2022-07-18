@@ -1,12 +1,11 @@
 import type { NextPage, GetStaticProps } from 'next'
-
 import Skill from '../components/Skill/Skill'
 import ProjectType from '../components/ProjectType/ProjectType'
 import Duration from '../components/Duration/Duration'
 import WorkingModel from '../components/WorkingModel/WorkingModel'
 import Experience from '../components/Experience/Experience'
-import Footer from '../components/Footer/Footer'
 import { useState } from 'react'
+import Button from '../components/Widgets/Button/Button'
 
 // Getting first API data using function Call(skills)
 const getSkillData = async () => {
@@ -99,14 +98,15 @@ export const getStaticProps: GetStaticProps = async () => {
 const Home: NextPage = ({ fullData }: any) => {
   const [particularData, setParticularData] = useState<number>(0)
 
-  const [selectedData, setSelectedData] = useState({
-    checkBoxData: [],
-  })
+  // const [selectedData, setSelectedData] = useState({
+  //   checkBoxData: [],
+  // })
 
   const data = fullData[1]
 
   // Function for forward navigation in single page
-  const handleFunction = () => {
+  const handleFunction = (e: any) => {
+    console.log(e, 'particularD')
     if (particularData < 4) {
       setParticularData(particularData + 1)
     } else {
@@ -116,7 +116,8 @@ const Home: NextPage = ({ fullData }: any) => {
   }
 
   // function for reverse navigation in single page
-  const reverseNavigation = () => {
+  const reverseNavigation = (e: any) => {
+    console.log(e, 'function')
     setParticularData(particularData - 1)
     console.log('cancel function')
   }
@@ -125,42 +126,48 @@ const Home: NextPage = ({ fullData }: any) => {
     setParticularData(0)
   }
 
-  const OnChange = (e: any) => {}
-
   //value for the Footer component
-  const footerName = [
-    {
-      name: 'Cancel',
-      path: '/',
-      func: cancelFunction,
-    },
-    {
-      name: 'Continue',
-      path: '',
-      func: handleFunction,
-    },
-  ]
+
   return (
     <div>
       {/* Rendering Data by giving Id to the component so that navigation is in possible way */}
 
       {particularData == 0 && <Skill data={fullData[0]} />}
       {particularData == 1 && (
-        <ProjectType data={data[0]} function={reverseNavigation} />
+        <ProjectType
+          data={data[0]}
+          functionPre={reverseNavigation}
+          functionFor={handleFunction}
+          functionCancel={cancelFunction}
+        />
       )}
       {particularData == 2 && (
-        <Duration data={data[1]} function={reverseNavigation} />
+        <Duration data={data[1]} functionDef={reverseNavigation} />
       )}
       {particularData == 3 && (
-        <WorkingModel data={data[2]} function={reverseNavigation} />
+        <WorkingModel data={data[2]} functionDef={reverseNavigation} />
       )}
       {particularData == 4 && (
-        <Experience data={data[3]} function={reverseNavigation} />
+        <Experience data={data[3]} functionDef={reverseNavigation} />
       )}
 
-      <div className="w-5/6 m-auto">
+      <div className="w-5/6 m-auto flex mt-5">
         {/* Footer component reusable component for the button in the bottom */}
-        <Footer value={footerName} />
+
+        <Button
+          value="Cancel"
+          name="disabled"
+          path="/"
+          func={cancelFunction}
+          textForm=""
+        />
+        <Button
+          value="Continue"
+          name="blue"
+          path=""
+          func={handleFunction}
+          textForm=""
+        />
       </div>
     </div>
   )

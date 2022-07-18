@@ -1,20 +1,9 @@
-import Link from 'next/link'
 import React from 'react'
-import CheckBox from '../CheckBox/Checkbox'
-import Footer from '../Footer/Footer'
+import CheckBox from '../Widgets/CheckBox/Checkbox'
 
-export default function WorkingModel(props: any) {
-  const sendData = props.data
-  //   const footerName = [
-  //     {
-  //       name: 'Cancel',
-  //       path: '/',
-  //     },
-  //     {
-  //       name: 'Continue',
-  //       path: '/Hire-page-5',
-  //     },
-  //   ]
+export default function WorkingModel({ data, functionDef }: any) {
+  const sendData = data
+
   return (
     <div>
       <div className="w-4/5 mx-auto">
@@ -24,13 +13,15 @@ export default function WorkingModel(props: any) {
           </div>
           <div className="mr-72">
             <div className="flex">
-              {/* <Link href="/Hire-page-3"> */}
-              <button onClick={props.function}>
+              <button
+                onClick={() => {
+                  functionDef()
+                }}
+              >
                 <span className="material-symbols-outlined text-gray-400 text-2xl rotate-180">
                   play_arrow
                 </span>
               </button>
-              {/* </Link> */}
               <div className="border-2 flex-none px-3 py-1 rounded-full text-gray-400">
                 Step4/6
               </div>
@@ -43,8 +34,6 @@ export default function WorkingModel(props: any) {
             <CheckBox data={data} />
           </div>
         ))}
-
-        {/* <Footer value={footerName} /> */}
       </div>
     </div>
   )
