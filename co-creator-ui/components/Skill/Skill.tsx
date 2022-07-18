@@ -3,18 +3,8 @@ import { useState } from 'react'
 import Card from '../Cards/Cards'
 import Input from '../Input/Input'
 
-const Skills = ({ data }: any) => {
-  const footerName = [
-    {
-      name: 'Cancel',
-      path: '/',
-    },
-    {
-      name: 'Continue',
-      path: '/Hire-page-2',
-    },
-  ]
-  console.log(data.data.skills.data[1].attributes)
+const Skills = ({ data, functionHandling }: any) => {
+  // console.log(data.data.skills.data[1].attributes)
 
   const [url, setUrl] = useState('http://localhost:1337')
 
@@ -48,7 +38,7 @@ const Skills = ({ data }: any) => {
         <div className="grid grid-cols-4 gap-1 w-5/6 ">
           {data.data.skills.data?.map((data: any, i: number) => (
             <>
-              {console.log(data)}
+              {/* {console.log(data)} */}
               {i !== 0 ? (
                 <>
                   {/* Card to display all the skill set one by one */}
@@ -66,13 +56,13 @@ const Skills = ({ data }: any) => {
           ))}
         </div>
         <div className=" ml-4 mt-5 w-5/6 m-auto">
-          <Input props="skills"></Input>
+          <Input props="skills" functionHandling={functionHandling}></Input>
         </div>
         <div className=" ml-4 mt-5 w-5/6 m-auto">
-          <Input props="names"></Input>
+          <Input props="names" functionHandling={functionHandling}></Input>
         </div>
         <div className=" ml-4 mt-5 w-5/6 m-auto">
-          <Input props="email"></Input>
+          <Input props="email" functionHandling={functionHandling}></Input>
         </div>
       </div>
     </>

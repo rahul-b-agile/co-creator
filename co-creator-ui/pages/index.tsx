@@ -98,23 +98,49 @@ export const getStaticProps: GetStaticProps = async () => {
 // Home page to Display all the records in Single page
 const Home: NextPage = ({ fullData }: any) => {
   const [particularData, setParticularData] = useState<number>(0)
-    
 
   // const [selectedData, setSelectedData] = useState({
   //   checkBoxData: [],
   // })
+  const [skillData, setSkillData] = useState({
+    // skillType: [],
+    name: '',
+    email: '',
+  })
+
+  const onChange = (e: any) => {
+    if (particularData != 0) {
+      if (e.target.checked) {
+        console.log(e.target.value)
+      }
+    } else {
+      // { ...credentials, [e.target.name]: e.target.value }
+
+      if (e.target.name == 'name') {
+        setSkillData({ ...skillData, name: e.target.value })
+      } else if ((e.target.name = 'email')) {
+        setSkillData({ ...skillData, email: e.target.value })
+      } else {
+        // var temp=
+      }
+      console.log(skillData)
+    }
+  }
 
   const data = fullData[1]
 
   // Function for forward navigation in single page
   const handleFunction = (e: any) => {
-    console.log(e, 'particularD')
-    if (particularData < 4) {
-      setParticularData(particularData + 1)
+    if (particularData == 0) {
+      console.log(skillData)
+      alert('skillData')
     } else {
-      alert('Ends Here No New Page Defined')
+      if (particularData < 4) {
+        setParticularData(particularData + 1)
+      } else {
+        alert('Ends Here No New Page Defined')
+      }
     }
-    console.log('function', particularData)
   }
 
   // function for reverse navigation in single page
@@ -134,13 +160,16 @@ const Home: NextPage = ({ fullData }: any) => {
     <div>
       {/* Rendering Data by giving Id to the component so that navigation is in possible way */}
 
-      {particularData == 0 && <Skill data={fullData[0]} />}
+      {particularData == 0 && (
+        <Skill data={fullData[0]} functionHandling={onChange} />
+      )}
       {particularData == 1 && (
         <ProjectType
           data={data[0]}
           functionPre={reverseNavigation}
           functionFor={handleFunction}
           functionCancel={cancelFunction}
+          functionHandling={onChange}
         />
       )}
       {particularData == 2 && (

@@ -7,6 +7,7 @@ export default function ProjectType({
   functionPre,
   functionFor,
   functionCancel,
+  functionHandling,
 }: any) {
   const sendData = data
   var str = 'name'
@@ -40,11 +41,11 @@ export default function ProjectType({
 
         {sendData.attributes.options.map((data: any) => (
           <div>
-            <CheckBox data={data} />
+            <CheckBox data={data} functionHandling={functionHandling} />
           </div>
         ))}
 
-        <div className="flex">
+        {/* <div className="flex">
           <Button
             value="Cancel"
             name="disabled"
@@ -59,7 +60,7 @@ export default function ProjectType({
             textForm="textData"
             func={functionFor}
           />
-        </div>
+        </div> */}
         {/* <Footer value={footerName} /> */}
       </div>
     </div>
