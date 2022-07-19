@@ -2,17 +2,22 @@ import styles from "./ProfileCards.module.css"
 import skillImg from "../../Assets/python.png"
 import profile from "../../Assets/profile1.png"
 import star from "../../Assets/star.png"
-import skills from "../../JSON/skills.json"
 import SelectedProfile from "../SelectedProfile/SelectedProfile"
+import { useRouter } from 'next/router'
+
+import {useState , useEffect} from "react"
 const Cards = ({ profile , func }: any) => {
+    const router = useRouter()
     console.log(profile[0].attributes.image.data[0].attributes.url)
     console.log(profile[0].attributes)
 console.log("profile", profile.map((data: any) => data.attributes.skill.map((data: any) => data.skill)))
-
+const [items, setItems] = useState([]);
 const handleClick = (data:any) =>
 {
-   func(data)
-
+   
+        localStorage.setItem('items', JSON.stringify(data));
+     
+ 
  
 }
 

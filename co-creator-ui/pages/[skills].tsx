@@ -110,7 +110,7 @@ const Navigate = ({ data }: any) => {
             {result.length == 1 ? (
               <Header result={result}></Header>
             ) : (
-              'Loading...'
+             null
             )}
 
             <div className="col-span-3 mt-3 ">

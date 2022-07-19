@@ -1,15 +1,14 @@
 import type { NextPage, GetStaticProps } from 'next'
-
+import {useContext} from "react"
 import Skill from '../components/Skill/Skill'
 import ProjectType from '../components/ProjectType/ProjectType'
 import Duration from '../components/Duration/Duration'
 import WorkingModel from '../components/WorkingModel/WorkingModel'
 import Experience from '../components/Experience/Experience'
-import { useContext, useState } from 'react'
+import { useState , useEffect } from 'react'
 import Button from '../components/Widgets/Button/Button'
 import { Context1 } from './context'
 import Router from 'next/router'
-
 // Getting first API data using function Call(skills)
 const getSkillData = async () => {
   const fetchParamsSkills = {
@@ -105,10 +104,11 @@ const Home: NextPage = ({ fullData }: any) => {
   console.log(value, 'provider value')
 
   const [skillData, setSkillData] = useState({
-    skillType: value.skillPage.skillName,
+    skillType: value.userObject ,
     name: '',
     email: '',
   })
+  console.log(skillData.skillType.SkillPage.skill, "skillData")
 
   const onChange = (e: any) => {
     console.log(e.target.name)

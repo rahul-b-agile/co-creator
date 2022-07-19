@@ -1,6 +1,8 @@
 import type { NextPage } from 'next'
 import skillImg from "../Assets/python.png"
 import { useRouter } from 'next/router'
+import {useState , useContext} from "react"
+import { Context1 } from '../../pages/context'
 
 
 
@@ -74,15 +76,32 @@ const Head = ({result}:any) => {
 
   const router = useRouter()
 
+  const enteredSkill = useContext(Context1)
+  // console.log(enteredSkill.setUserObject, " ENTERED SKILL")
+  // console.log(enteredSkill.userObject, "OBJECT")
+  console.log(enteredSkill)
+ 
+ 
+
+
+  const handleChange = (data:any) =>
+  {
+    var skill={skill:data}
+    enteredSkill.setUserObject({SkillPage:skill})
+    router.push("/")
+   // console.log(enteredSkill,"handleChange")
+  
+  }
+
 
   
 
 
 
-  console.log(result[0].attributes)
-  console.log(result[0].attributes.skill)
-  console.log(result[0].attributes.description)
-  console.log(result[0].attributes.image.data[0].attributes.url)
+  // console.log(result[0].attributes)
+  // console.log(result[0].attributes.skill)
+  // console.log(result[0].attributes.description)
+  // console.log(result[0].attributes.image.data[0].attributes.url)
   
   // console.log(skillImg)
   // console.log(skills.data)
@@ -101,7 +120,7 @@ const Head = ({result}:any) => {
               <div className='tracking-wide text-xl w-[90%] font-semibold mt-5 '>{result[0].attributes.description}
               </div>
               <div>
-                <button className="bg-blue-500 w-[69%] mt-5 tracking-wide ml-[4%]  text-2xl hover:bg-blue-700 text-white  font-bold py-2 px-4 ">
+                <button onClick={()=>handleChange(result[0].attributes.skill)} className="bg-blue-500 w-[69%] mt-5 tracking-wide ml-[4%]  text-2xl hover:bg-blue-700 text-white  font-bold py-2 px-4 ">
                   Hire {result[0].attributes.skill} developers
                 </button>
               </div>
