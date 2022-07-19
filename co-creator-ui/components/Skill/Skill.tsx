@@ -1,17 +1,12 @@
-// import type { NextPage } from 'next'
 import { useState } from 'react'
 import Card from '../Cards/Cards'
 import Input from '../Input/Input'
 
 const Skills = ({ data, functionHandling }: any) => {
-  // console.log(data.data.skills.data[1].attributes)
-
   const [url, setUrl] = useState('http://localhost:1337')
 
   return (
     <>
-      {/* <Navbar></Navbar> */}
-
       <div className="w-5/6 m-auto">
         <div className="ml-4">
           <div className="grid grid-cols-2 mt-8 items-end">
@@ -38,7 +33,6 @@ const Skills = ({ data, functionHandling }: any) => {
         <div className="grid grid-cols-4 gap-1 w-5/6 ">
           {data.data.skills.data?.map((data: any, i: number) => (
             <>
-              {/* {console.log(data)} */}
               {i !== 0 ? (
                 <>
                   {/* Card to display all the skill set one by one */}

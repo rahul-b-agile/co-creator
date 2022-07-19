@@ -5,8 +5,10 @@ import ProjectType from '../components/ProjectType/ProjectType'
 import Duration from '../components/Duration/Duration'
 import WorkingModel from '../components/WorkingModel/WorkingModel'
 import Experience from '../components/Experience/Experience'
-import { useState } from 'react'
+import { useContext, useState } from 'react'
 import Button from '../components/Widgets/Button/Button'
+import { Context1 } from './context'
+import Router from 'next/router'
 
 // Getting first API data using function Call(skills)
 const getSkillData = async () => {
@@ -99,16 +101,17 @@ export const getStaticProps: GetStaticProps = async () => {
 const Home: NextPage = ({ fullData }: any) => {
   const [particularData, setParticularData] = useState<number>(0)
 
-  // const [selectedData, setSelectedData] = useState({
-  //   checkBoxData: [],
-  // })
+  const value: any = useContext(Context1)
+  console.log(value, 'provider value')
+
   const [skillData, setSkillData] = useState({
-    // skillType: [],
+    skillType: value.skillPage.skillName,
     name: '',
     email: '',
   })
 
   const onChange = (e: any) => {
+    console.log(e.target.name)
     if (particularData != 0) {
       if (e.target.checked) {
         console.log(e.target.value)
@@ -118,10 +121,10 @@ const Home: NextPage = ({ fullData }: any) => {
 
       if (e.target.name == 'name') {
         setSkillData({ ...skillData, name: e.target.value })
-      } else if ((e.target.name = 'email')) {
+      } else if (e.target.name == 'email') {
+        console.log('email')
         setSkillData({ ...skillData, email: e.target.value })
       } else {
-        // var temp=
       }
       console.log(skillData)
     }
@@ -133,7 +136,10 @@ const Home: NextPage = ({ fullData }: any) => {
   const handleFunction = (e: any) => {
     if (particularData == 0) {
       console.log(skillData)
+      value.setUserObject({ SkillPage: skillData })
+
       alert('skillData')
+      Router.push('/login')
     } else {
       if (particularData < 4) {
         setParticularData(particularData + 1)

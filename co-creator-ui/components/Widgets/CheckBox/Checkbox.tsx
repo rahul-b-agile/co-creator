@@ -7,8 +7,6 @@ interface checkoptions {
 }
 
 const CheckBox = ({ data, functionHandling }: checkoptions) => {
-  //   console.log(props)
-
   return (
     <div className="flex space-x-4 my-4 ml-2  ">
       <div>

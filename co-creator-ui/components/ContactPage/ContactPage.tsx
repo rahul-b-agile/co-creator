@@ -5,19 +5,22 @@ import 'react-phone-input-2/lib/style.css'
 
 export default function ContactPage() {
   const [selectedTimezone, setSelectedTimezone] = useState('')
-  const [phoneNumber, setPhoneNumber] = useState('')
+  const [value, setValue] = useState('sdkf')
   return (
     <div>
       <div className="w-3/6 mx-auto">
         <p> Let's get Started What's the best way for us to reach you?</p>
         <div>
           <PhoneInput
-            country={'us'}
-            value={phoneNumber}
-            containerClass="border-none"
-            containerStyle={{ width: '100%' }}
-            onChange={(phoneNumber) => {
-              setPhoneNumber(phoneNumber)
+            specialLabel={''}
+            country={'th'}
+            value={value}
+            onChange={(phone) => {
+              console.log()
+              setValue(phone)
+            }}
+            inputStyle={{
+              width: '100%',
             }}
           />
         </div>
@@ -27,7 +30,7 @@ export default function ContactPage() {
         <div>
           <TimezoneSelect
             value={selectedTimezone}
-            onChange={setSelectedTimezone}
+            onChange={() => setSelectedTimezone(selectedTimezone)}
             timezones={{
               ...allTimezones,
               'America/Lima': 'Pittsburgh',
@@ -35,7 +38,7 @@ export default function ContactPage() {
             }}
           />
         </div>
-        <div> Time</div>
+        <div>{/* <TimePicker /> */} Time</div>
         <div className="text-center">
           <button className="bg-blue-500 text-white py-2 rounded px-10 mt-3">
             {' '}

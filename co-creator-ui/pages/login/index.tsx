@@ -1,9 +1,14 @@
 import Link from 'next/link'
-import { useState } from 'react'
+import { useContext, useState } from 'react'
 import { useRouter } from 'next/router'
+import { Context1 } from '../context'
 
 //Login component
 const Login = () => {
+  const value = useContext(Context1)
+
+  console.log(value, 'value created using context')
+
   const Router = useRouter()
   const [credentials, setCredentials] = useState({
     userName: '',
