@@ -1,7 +1,11 @@
 import React from 'react'
 import CheckBox from '../Widgets/CheckBox/Checkbox'
 
-export default function WorkingModel({ data, functionDef }: any) {
+export default function WorkingModel({
+  data,
+  functionDef,
+  functionHandling,
+}: any) {
   const sendData = data
 
   return (
@@ -31,7 +35,7 @@ export default function WorkingModel({ data, functionDef }: any) {
 
         {sendData.attributes.options.map((data: any) => (
           <div>
-            <CheckBox data={data} />
+            <CheckBox data={data} functionHandling={functionHandling} />
           </div>
         ))}
       </div>

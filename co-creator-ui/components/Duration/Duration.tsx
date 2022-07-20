@@ -1,7 +1,7 @@
 import React from 'react'
 import RadioButton from '../Widgets/RadioButton/RadioButton'
 
-export default function Duration({ data, functionDef }: any) {
+export default function Duration({ data, functionDef, functionHandling }: any) {
   const sendData = data
 
   return (
@@ -32,11 +32,9 @@ export default function Duration({ data, functionDef }: any) {
 
         {sendData.attributes.options.map((data: any) => (
           <div>
-            {console.log(data, 'radiochcek')}
-            <RadioButton data={data} />
+            <RadioButton data={data} functionHandling={functionHandling} />
           </div>
         ))}
-
       </div>
     </div>
   )

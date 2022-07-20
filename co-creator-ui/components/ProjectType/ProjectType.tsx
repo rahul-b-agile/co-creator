@@ -5,8 +5,7 @@ import Button from '../Widgets/Button/Button'
 export default function ProjectType({
   data,
   functionPre,
-  functionFor,
-  functionCancel,
+
   functionHandling,
 }: any) {
   const sendData = data
@@ -44,24 +43,6 @@ export default function ProjectType({
             <CheckBox data={data} functionHandling={functionHandling} />
           </div>
         ))}
-
-        {/* <div className="flex">
-          <Button
-            value="Cancel"
-            name="disabled"
-            path="/"
-            textForm=""
-            func={functionCancel}
-          />
-          <Button
-            value="Continue"
-            name="blue"
-            path=""
-            textForm="textData"
-            func={functionFor}
-          />
-        </div> */}
-        {/* <Footer value={footerName} /> */}
       </div>
     </div>
   )

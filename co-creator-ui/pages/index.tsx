@@ -1,14 +1,16 @@
 import type { NextPage, GetStaticProps } from 'next'
-import {useContext} from "react"
+
 import Skill from '../components/Skill/Skill'
 import ProjectType from '../components/ProjectType/ProjectType'
 import Duration from '../components/Duration/Duration'
 import WorkingModel from '../components/WorkingModel/WorkingModel'
 import Experience from '../components/Experience/Experience'
-import { useState , useEffect } from 'react'
+import { useContext, useState } from 'react'
 import Button from '../components/Widgets/Button/Button'
 import { Context1 } from './context'
 import Router from 'next/router'
+import functionCall from '../components/Functions/function'
+
 // Getting first API data using function Call(skills)
 const getSkillData = async () => {
   const fetchParamsSkills = {
@@ -104,17 +106,71 @@ const Home: NextPage = ({ fullData }: any) => {
   console.log(value, 'provider value')
 
   const [skillData, setSkillData] = useState({
-    skillType: value.userObject ,
+    // skillType: value.skillPage.skillName,
     name: '',
     email: '',
   })
-  console.log(skillData.skillType.SkillPage.skill, "skillData")
 
-  const onChange = (e: any) => {
-    console.log(e.target.name)
+  const [content, setContent] = useState({
+    skillData: skillData,
+    projectTypeData: [],
+    durationData: [],
+    workingModelData: [],
+    experienceData: [],
+  })
+
+  //OnChange functions are handled here
+  const handleChange = (e: any) => {
+    // functionCall(e, content, particularData)
+    console.log(e.target.option, 'checkbox')
     if (particularData != 0) {
       if (e.target.checked) {
-        console.log(e.target.value)
+        if (particularData == 1) {
+          var temp = content.projectTypeData
+          temp.push(e.target.value)
+          setContent({ ...content, projectTypeData: temp })
+        }
+        if (particularData == 2) {
+          setContent({ ...content, durationData: e.target.value })
+        }
+        if (particularData == 3) {
+          var temp = content.workingModelData
+          temp.push(e.target.value)
+          setContent({ ...content, workingModelData: temp })
+        }
+        if (particularData == 4) {
+          var temp = content.experienceData
+          temp.push(e.target.value)
+          setContent({ ...content, experienceData: temp })
+        }
+        console.log(e.target.name)
+      } else {
+        //Else part of unchecked data
+        console.log(e.target.name, 'unchecked')
+        if (particularData == 1) {
+          var temp = content.projectTypeData
+          console.log(temp.splice(temp.indexOf(e.target.value), 1))
+          console.log(temp)
+          setContent({ ...content, projectTypeData: temp })
+        }
+        if (particularData == 2) {
+          var temp = content.durationData
+          console.log(temp.splice(temp.indexOf(e.target.value), 1))
+          console.log(temp)
+          setContent({ ...content, durationData: temp })
+        }
+        if (particularData == 3) {
+          var temp = content.workingModelData
+          console.log(temp.splice(temp.indexOf(e.target.value), 1))
+          console.log(temp)
+          setContent({ ...content, workingModelData: temp })
+        }
+        if (particularData == 4) {
+          var temp = content.experienceData
+          console.log(temp.splice(temp.indexOf(e.target.value), 1))
+          console.log(temp)
+          setContent({ ...content, experienceData: temp })
+        }
       }
     } else {
       // { ...credentials, [e.target.name]: e.target.value }
@@ -126,7 +182,6 @@ const Home: NextPage = ({ fullData }: any) => {
         setSkillData({ ...skillData, email: e.target.value })
       } else {
       }
-      console.log(skillData)
     }
   }
 
@@ -134,14 +189,17 @@ const Home: NextPage = ({ fullData }: any) => {
 
   // Function for forward navigation in single page
   const handleFunction = (e: any) => {
+    //function handling and saving data in context for particularData=0
     if (particularData == 0) {
-      console.log(skillData)
-      value.setUserObject({ SkillPage: skillData })
-
-      alert('skillData')
-      Router.push('/login')
+      setContent({ ...content, skillData: skillData })
+      value.setUserObject({ ...value.UserObject, SkillData: content })
+      setParticularData(particularData + 1)
+      // alert('skillData')
+      // Router.push('/login')
     } else {
+      //Rest of the content execution done here (particular Date=1,2,3)
       if (particularData < 4) {
+        value.setUserObject({ ...value.UserObject, Skillpage: content })
         setParticularData(particularData + 1)
       } else {
         alert('Ends Here No New Page Defined')
@@ -157,7 +215,8 @@ const Home: NextPage = ({ fullData }: any) => {
   }
 
   const cancelFunction = () => {
-    setParticularData(0)
+    // setParticularData(0)
+    Router.push('/')
   }
 
   //value for the Footer component
@@ -167,25 +226,35 @@ const Home: NextPage = ({ fullData }: any) => {
       {/* Rendering Data by giving Id to the component so that navigation is in possible way */}
 
       {particularData == 0 && (
-        <Skill data={fullData[0]} functionHandling={onChange} />
+        <Skill data={fullData[0]} functionHandling={handleChange} />
       )}
       {particularData == 1 && (
         <ProjectType
           data={data[0]}
           functionPre={reverseNavigation}
-          functionFor={handleFunction}
-          functionCancel={cancelFunction}
-          functionHandling={onChange}
+          functionHandling={handleChange}
         />
       )}
       {particularData == 2 && (
-        <Duration data={data[1]} functionDef={reverseNavigation} />
+        <Duration
+          data={data[1]}
+          functionDef={reverseNavigation}
+          functionHandling={handleChange}
+        />
       )}
       {particularData == 3 && (
-        <WorkingModel data={data[2]} functionDef={reverseNavigation} />
+        <WorkingModel
+          data={data[2]}
+          functionDef={reverseNavigation}
+          functionHandling={handleChange}
+        />
       )}
       {particularData == 4 && (
-        <Experience data={data[3]} functionDef={reverseNavigation} />
+        <Experience
+          data={data[3]}
+          functionDef={reverseNavigation}
+          functionHandling={handleChange}
+        />
       )}
 
       <div className="w-5/6 m-auto flex mt-5">

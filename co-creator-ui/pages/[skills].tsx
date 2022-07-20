@@ -11,6 +11,7 @@ export const getStaticPaths: GetStaticPaths<{ slug: string }> = async () => {
     fallback: 'blocking', //indicates the type of fallback
   }
 }
+
 export const getProfile = async () => {
   const res = await fetch('http://localhost:1337/api/profiles?populate=*')
   const data1 = await res.json()
