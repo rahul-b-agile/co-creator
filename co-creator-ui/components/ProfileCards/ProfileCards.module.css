@@ -1,0 +1,38 @@
+.expert {
+    background-color: black;
+    color: white;
+    font-size: 90%;
+    clip-path: polygon(
+      0% 0%,
+      100% 0%,
+      92% 100%,
+      /* Change here right top */ 0% 100%
+    );
+    
+    width: 120%;
+  }
+  .skill {
+    border: 1px solid rgb(214, 195, 26);
+    border-radius: 5px;
+    background-color: #fef8e5;
+    margin: 3px;
+    color: black;
+    font-size: 90%;
+    text-align: center;
+    
+   
+  
+ 
+  }
+  .worked {
+    border: 1px solid rgb(124, 119, 119);
+    border-radius: 5px;
+   
+    text-align: center;
+    color: rgb(161, 146, 146);
+  
+  
+    margin: 3px;
+
+    font-size: 90%;
+  }
