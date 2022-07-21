@@ -1,7 +1,6 @@
 import { GetStaticPaths } from 'next'
 import { useRouter } from 'next/router'
 import React, { useState, useEffect } from 'react'
-import Navbar from '../components/ProfileNavbar/ProfileNavbar'
 import Header from '../components/Header/Header'
 import Cards from '../components/ProfileCards/ProfileCards'
 import SelectedProfile from '../components/SelectedProfile/SelectedProfile'
@@ -11,6 +10,7 @@ export const getStaticPaths: GetStaticPaths<{ slug: string }> = async () => {
     fallback: 'blocking', //indicates the type of fallback
   }
 }
+
 export const getProfile = async () => {
   const fetchParamsProfile = {
     method: 'POST',

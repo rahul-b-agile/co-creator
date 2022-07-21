@@ -3,7 +3,7 @@ import Card from '../Cards/Cards'
 import Input from '../Input/Input'
 import { Context1 } from '../../pages/context'
 
-const Skills = ({ data, functionHandling }: any) => {
+const Skills = ({ data, functionHandling, paramsData }: any) => {
   const [url, setUrl] = useState('http://localhost:1337')
  
   
@@ -64,6 +64,7 @@ console.log(skill , "handleCards1")
                   {/* Card to display all the skill set one by one */}
                   <Card
                     skills={data.attributes.skillname}
+                    paramsData={paramsData}
                     src={
                       url + data.attributes.skillimage?.data[0]?.attributes.url
                     }
@@ -71,13 +72,21 @@ console.log(skill , "handleCards1")
                   ></Card>
                 </>
               ) : (
-                <Card skills={data.attributes.skillname} src={undefined}  func={handleCards}></Card>
+                <Card
+                  skills={data.attributes.skillname}
+                  paramsData={paramsData}
+                  src={undefined}
+                ></Card>
               )}
             </>
           ))}
         </div>
         <div className=" ml-4 mt-5 w-5/6 m-auto">
-          <Input props="skills" functionHandling={functionHandling}></Input>
+          <Input
+            props="skills"
+            functionHandling={functionHandling}
+            value={paramsData}
+          ></Input>
         </div>
         <div className=" ml-4 mt-5 w-5/6 m-auto">
           <Input props="names" functionHandling={functionHandling}></Input>
