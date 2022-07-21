@@ -4,10 +4,9 @@ import { Context1 } from '../../pages/context'
 interface props {
   props: string
   functionHandling: any
-  value: any
 }
 
-const Input = ({ props, functionHandling, value }: props) => {
+const Input = ({ props, functionHandling }: props) => {
   const enteredSkill = useContext(Context1)
 
   // console.log(enteredSkill.userObject.SkillPage.skill , "Input Page")
@@ -15,7 +14,7 @@ const Input = ({ props, functionHandling, value }: props) => {
   var placeholder: string = ''
   var type: string = ''
   var name: string = ''
-  // var value
+  var value
   switch (props) {
     case 'skills':
       className =
@@ -23,7 +22,7 @@ const Input = ({ props, functionHandling, value }: props) => {
       placeholder = 'Enter other skills (50+ available)'
       name = 'skill'
       type = 'text'
-      // value = enteredSkill.userObject.SkillPage.skill
+      value = enteredSkill.userObject.SkillPage.skill
       break
     case 'email':
       className =
