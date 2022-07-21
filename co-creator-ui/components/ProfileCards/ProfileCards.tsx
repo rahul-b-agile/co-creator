@@ -4,30 +4,38 @@ import profile from "../../Assets/profile1.png"
 import star from "../../Assets/star.png"
 import SelectedProfile from "../SelectedProfile/SelectedProfile"
 import { useRouter } from 'next/router'
+import { Context1 } from '../../pages/context'
 
-import {useState , useEffect} from "react"
+import {useState , useEffect , useContext} from "react"
 const Cards = ({ profile , func }: any) => {
-    const router = useRouter()
-    console.log(profile[0].attributes.image.data[0].attributes.url)
-    console.log(profile[0].attributes)
-console.log("profile", profile.map((data: any) => data.attributes.skill.map((data: any) => data.skill)))
-const [items, setItems] = useState([]);
+    // const router = useRouter()
+//    profile.slice(0,3)
+//    console.log(profile2 ,"profile2")
+    // const [profile1 , setProfile] = useState([])
+//     console.log(profile[0].attributes.image.data[0].attributes.url)
+//     console.log(profile[0].attributes)
+// console.log("profile", profile.map((data: any) => data.attributes.skill.map((data: any) => data.skill)))
+// console.log("Profil1" , profile)
+// const [items, setItems] = useState([]);
+const router = useRouter()
+const value: any = useContext(Context1)
+// console.log(value.setUserObject1([{"data1":"1"}]))
+console.log(value, 'profile Cards')
 const handleClick = (data:any) =>
 {
+    router.push("/profile")
    
-        localStorage.setItem('items', JSON.stringify(data));
+    value.setUserObject1([data])
      
- 
- 
 }
 
 
     return (
         <>
-            {profile.map((data: any) => (
+            {profile.slice(0,3).map((data: any) => (
 
                 <>
-                    <div className=" rounded-lg overflow-hidden ml-32 w-[97%] mb-10 border border-slate-250 shadow-lg">
+                    <div className=" rounded-lg overflow-hidden max-w-sm max-h-sm flex mb-10 border border-slate-250 shadow-lg">
                         <div className="grid grid-cols-4 mr-2">
                             <div className="col-span-1">    <img className="w-[16em]" src={data.attributes.image.data[0].attributes.url} alt="Sunset in the mountains" /></div>
                             <div className="col-span-3 mt-1 ">

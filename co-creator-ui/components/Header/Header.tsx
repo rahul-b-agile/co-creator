@@ -113,7 +113,7 @@ const Head = ({result}:any) => {
 
         <>
 
-          <div className="grid grid-cols-3 gap-4">
+          <div className="grid grid-cols-3 gap-4 mt-5 ">
 
             <div className="col-span-2 ml-[20%] w-[70%] ">
               <div className='grid  text-5xl tracking-wide justify-items-center font-semibold'> Hire the Top {result[0].attributes.skill} Developers in any time Zone!</div>

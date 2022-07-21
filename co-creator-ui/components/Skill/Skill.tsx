@@ -1,9 +1,35 @@
-import { useState } from 'react'
+import { useState , useContext } from 'react'
 import Card from '../Cards/Cards'
 import Input from '../Input/Input'
+import { Context1 } from '../../pages/context'
 
 const Skills = ({ data, functionHandling }: any) => {
   const [url, setUrl] = useState('http://localhost:1337')
+ 
+  
+  const value: any = useContext(Context1)
+  console.log(value, 'provider value Skill')
+ 
+  const handleCards = (data:any) =>
+{
+ 
+  var skill={skill:data}
+  value.setUserObject({SkillPage:skill})
+}
+
+const [skill , setSkill] = useState([])
+
+const handleCards1 = (data:any) =>
+{
+
+setSkill(skill=>[...skill , data])
+
+}
+console.log(skill , "handleCards1")
+
+
+  
+
 
   return (
     <>
@@ -41,10 +67,11 @@ const Skills = ({ data, functionHandling }: any) => {
                     src={
                       url + data.attributes.skillimage?.data[0]?.attributes.url
                     }
+                    func={handleCards}
                   ></Card>
                 </>
               ) : (
-                <Card skills={data.attributes.skillname} src={undefined}></Card>
+                <Card skills={data.attributes.skillname} src={undefined}  func={handleCards}></Card>
               )}
             </>
           ))}

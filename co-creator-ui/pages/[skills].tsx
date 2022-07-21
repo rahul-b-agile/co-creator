@@ -12,7 +12,46 @@ export const getStaticPaths: GetStaticPaths<{ slug: string }> = async () => {
   }
 }
 export const getProfile = async () => {
-  const res = await fetch('http://localhost:1337/api/profiles?populate=*')
+  const fetchParamsProfile = {
+    method: 'POST',
+    headers: {
+      'content-type': 'application/json',
+    },
+    body: JSON.stringify({
+      query: ` query {
+        profiles {
+          data {
+            id
+            attributes {
+              name
+              domain
+              experience
+              primaryskill
+              availability
+              image {
+                data {
+                  attributes {
+                    url
+                  }
+                }
+              }
+              skill {
+                skill
+                id
+              }
+              technologies {
+                id
+                technology
+              }
+            }
+          }
+        }
+      }
+      
+`,
+    }),
+  }
+  const res = await fetch('http://localhost:1337/graphql',fetchParamsProfile)
   const data1 = await res.json()
   console.log(data1)
 
@@ -20,14 +59,47 @@ export const getProfile = async () => {
     props1: { data1: data1 },
   }
 }
+
+
+
 export const getStaticProps = async () => {
   var total = []
-
   var profile = await getProfile()
-  total.push(profile)
+  const fetchParams = {
+    method: 'POST',
 
-  const res = await fetch('http://localhost:1337/api/contents?populate=*')
+    headers: {
+      'content-type': 'application/json',
+    },
+    body: JSON.stringify({
+      query: `query {
+        contents {
+          data {
+            id
+            attributes {
+              skill
+              description
+              image {
+                data {
+                  attributes {
+                    url
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+     `,
+    }),
+  }
+total.push(profile)
+
+const res = await fetch('http://localhost:1337/graphql',fetchParams)
   const data = await res.json()
+  
+  
+  
   console.log(data)
   total.push(data)
 
@@ -35,8 +107,13 @@ export const getStaticProps = async () => {
     props: { data: total },
   }
 }
+
+
+
+
+
 const Navigate = ({ data }: any) => {
-  console.log(data)
+  console.log(data[1].data.contents)
   const userProfile: any[] = []
   const [result, setResult] = useState([])
   const [profile, setProfile] = useState([])
@@ -57,12 +134,12 @@ const Navigate = ({ data }: any) => {
   if (router.query.skills) {
     var skill = router.query.skills
     console.log(skill)
-    console.log('profile', data[0].props1.data1.data[0].attributes.primaryskill)
+    console.log('profile', data[0].props1.data1.data.profiles.data[0])
 
     useEffect(
       () =>
         setProfile(
-          data[0].props1.data1.data.filter(
+          data[0].props1.data1.data.profiles.data.filter(
             (data: any, i: number) =>
               data.attributes.primaryskill.toUpperCase() == skill.toUpperCase()
           )
@@ -73,7 +150,7 @@ const Navigate = ({ data }: any) => {
     useEffect(
       () =>
         setResult(
-          data[1].data.filter(
+          data[1].data.contents.data.filter(
             (data: any, i: any) =>
               data.attributes.skill.toUpperCase() == skill.toUpperCase()
           )
@@ -89,7 +166,7 @@ const Navigate = ({ data }: any) => {
   }
   if (router.query.skills) {
     if (profile.length > 0) {
-      ;() => setLoading(false)
+      ; () => setLoading(false)
     }
   }
 
@@ -102,37 +179,33 @@ const Navigate = ({ data }: any) => {
     //     {loading && profile.length >= 1 ? <Cards profile={profile}></Cards> : "No Matched Skills"}
 
     <>
-      {selectedProfile.length == 0 ? (
+
+      <>
+        {/* <Navbar></Navbar> */}
+
         <>
-          {/* <Navbar></Navbar> */}
+          {result.length == 1 ? (
+            <Header result={result}></Header>
+          ) : (
+            null
+          )}
 
-          <>
-            {result.length == 1 ? (
-              <Header result={result}></Header>
-            ) : (
-             null
-            )}
 
-            <div className="col-span-3 mt-3 ">
-              <div className="grid grid-cols-12 ml-[5%] m5-[5%]">
-                <div className="col-span-9  ">
-                  <div className="ml-[5%]">
-                    <div className="grid grid-flow-col w-[60%]  m-auto">
-                      {loading && profile.length >= 1 ? (
-                        <Cards profile={profile} func={handleProfile}></Cards>
-                      ) : (
-                        'No Matched Skills'
-                      )}
-                    </div>
-                  </div>
-                </div>
+
+          <div>
+            {loading && profile.length >= 1 ? (
+              <div className=" mt-5 md:flex md:justify-evenly xs:flex-none">
+                <Cards profile={profile} func={handleProfile}></Cards>
               </div>
-            </div>
-          </>
+            ) : (
+              'No Matched Skills'
+            )}
+          </div>
+
+
         </>
-      ) : (
-        <SelectedProfile props={selectedProfile}></SelectedProfile>
-      )}
+      </>
+
     </>
 
     // </>

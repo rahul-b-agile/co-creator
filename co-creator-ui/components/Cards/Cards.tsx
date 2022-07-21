@@ -5,9 +5,10 @@ import { Context1 } from '../../pages/context'
 interface props {
   skills: string
   src: string | undefined
+  func:any
 }
 
-const Card = ({ skills, src }: props) => {
+const Card = ({ skills, src, func }: props) => {
   // console.log(skills, src)
 
   const cards = useContext(Context1) //Context
@@ -17,7 +18,10 @@ const Card = ({ skills, src }: props) => {
 
   const handleClick = (data:any) =>
   {
-      console.log(data)
+    if(data!="Not sure, Need advice")
+    func(data)
+   
+  console.log(func , "func.handleCards")
   }
 
 
@@ -26,7 +30,7 @@ const Card = ({ skills, src }: props) => {
 
     <>
 
-      {cards.userObject.SkillPage.skill == skills ? <div className="sm:w-32 lg:w-56 border-yellow-50 ml-1 pl-3 ">
+      {cards.userObject.SkillPage.skill == skills && "Not sure, Need advice"!=skills ? <div className="sm:w-32 lg:w-56 border-yellow-50 ml-1 pl-3 ">
         <div className="flex flex-row mt-5 p-1 items-center bg-black   rounded-md  shadow-2xl border border-red-500">
           <div className="ml-2">
             {src == undefined ? null : (

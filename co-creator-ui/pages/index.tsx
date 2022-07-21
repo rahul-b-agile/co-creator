@@ -1,11 +1,11 @@
 import type { NextPage, GetStaticProps } from 'next'
-import {useContext} from "react"
+import { useContext } from "react"
 import Skill from '../components/Skill/Skill'
 import ProjectType from '../components/ProjectType/ProjectType'
 import Duration from '../components/Duration/Duration'
 import WorkingModel from '../components/WorkingModel/WorkingModel'
 import Experience from '../components/Experience/Experience'
-import { useState , useEffect } from 'react'
+import { useState, useEffect } from 'react'
 import Button from '../components/Widgets/Button/Button'
 import { Context1 } from './context'
 import Router from 'next/router'
@@ -104,11 +104,18 @@ const Home: NextPage = ({ fullData }: any) => {
   console.log(value, 'provider value')
 
   const [skillData, setSkillData] = useState({
-    skillType: value.userObject ,
+    skillType: value.userObject,
     name: '',
     email: '',
   })
-  console.log(skillData.skillType.SkillPage.skill, "skillData")
+  // console.log(skillData.skillType.SkillPage.skill, "skillData")
+
+
+
+
+
+
+
 
   const onChange = (e: any) => {
     console.log(e.target.name)
@@ -137,9 +144,8 @@ const Home: NextPage = ({ fullData }: any) => {
     if (particularData == 0) {
       console.log(skillData)
       value.setUserObject({ SkillPage: skillData })
+      setParticularData(particularData + 1)
 
-      alert('skillData')
-      Router.push('/login')
     } else {
       if (particularData < 4) {
         setParticularData(particularData + 1)
