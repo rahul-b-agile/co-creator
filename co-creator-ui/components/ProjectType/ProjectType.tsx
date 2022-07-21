@@ -1,6 +1,7 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import CheckBox from '../Widgets/CheckBox/Checkbox'
 import Button from '../Widgets/Button/Button'
+import { Context1 } from '../../pages/context'
 
 export default function ProjectType({
   data,
@@ -8,6 +9,9 @@ export default function ProjectType({
 
   functionHandling,
 }: any) {
+  var value: any = useContext(Context1)
+  console.log(value, 'Project type page token')
+
   const sendData = data
   var str = 'name'
 

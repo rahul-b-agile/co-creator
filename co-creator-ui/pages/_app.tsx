@@ -8,6 +8,7 @@ import { useState } from 'react'
 function MyApp({ Component, pageProps }: any) {
   const [userObject, setUserObject] = useState({
     SkillPage: {},
+    token: {},
   })
   const [userObject1, setUserObject1] = useState()
   return (
@@ -24,8 +25,10 @@ function MyApp({ Component, pageProps }: any) {
           value={{
             userObject: userObject,
             setUserObject: setUserObject,
+            userObject1: userObject1,
+            setUserObject1: setUserObject1,
           }}
-          value1={{ userObject1: userObject1, setUserObject1: setUserObject1 }}
+          // value1={{ userObject1: userObject1, setUserObject1: setUserObject1 }}
         >
           <Component {...pageProps} />
         </Context1.Provider>

@@ -49,8 +49,8 @@ const Navigate = ({ data }: any) => {
 
   const handleProfile = (data: any) => {
     userProfile.push(data)
-    console.log(userProfile)
-    console.log(userProfile.length)
+    // console.log(userProfile)
+    // console.log(userProfile.length)
     var data = data
     setSlectedProfile(data)
     console.log('selected profile', selectedProfile)

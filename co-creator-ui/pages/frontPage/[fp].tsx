@@ -139,6 +139,9 @@ const Home: NextPage = ({ fullData }: any) => {
     experienceData: [],
   })
 
+  console.log(value.userObject.token, 'token value')
+
+  const token = value.userObject.token
   //OnChange functions are handled here
   const handleChange = (e: any) => {
     // functionCall(e, content, particularData)
@@ -209,15 +212,19 @@ const Home: NextPage = ({ fullData }: any) => {
 
   // Function for forward navigation in single page
   const handleFunction = async (e: any) => {
+    value.setUserObject({ ...value.userObject, token: 'password' })
     //function handling and saving data in context for particularData=0
     if (particularData == 0) {
       //password Generator after click on Continue in first page
+
+      // if(value.userObject.token==''){
+
+      // }
       var password1 = generator.generate({
         length: 10,
         numbers: true,
       })
       setPassword(password1)
-      console.log(password)
       const response = await fetch(
         'http://ec2-52-42-247-15.us-west-2.compute.amazonaws.com:1337/api/auth/local/register',
         {
@@ -244,7 +251,7 @@ const Home: NextPage = ({ fullData }: any) => {
       setContent({ ...content, skillData: skillData })
       value.setUserObject({ ...value.UserObject, SkillData: content })
       // alert('skillData')
-      // setParticularData(particularData + 1)
+      setParticularData(particularData + 1)
       // Router.push('/angular')
     } else {
       //Rest of the content execution done here (particular Date=1,2,3)

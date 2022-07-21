@@ -1,8 +1,13 @@
-import { useState } from 'react'
+import { useContext, useState } from 'react'
+import { Context1 } from '../../pages/context'
 import Card from '../Cards/Cards'
 import Input from '../Input/Input'
 
 const Skills = ({ data, functionHandling, paramsData }: any) => {
+  const { userObject }: any = useContext(Context1)
+
+  console.log(userObject.token, 'from skill')
+
   const [url, setUrl] = useState('http://localhost:1337')
 
   return (
@@ -61,12 +66,24 @@ const Skills = ({ data, functionHandling, paramsData }: any) => {
             value={paramsData}
           ></Input>
         </div>
-        <div className=" ml-4 mt-5 w-5/6 m-auto">
-          <Input props="names" functionHandling={functionHandling}></Input>
-        </div>
-        <div className=" ml-4 mt-5 w-5/6 m-auto">
-          <Input props="email" functionHandling={functionHandling}></Input>
-        </div>
+        {userObject.value !== '' && (
+          <>
+            <div className=" ml-4 mt-5 w-5/6 m-auto">
+              <Input
+                props="names"
+                functionHandling={functionHandling}
+                value=""
+              ></Input>
+            </div>
+            <div className=" ml-4 mt-5 w-5/6 m-auto">
+              <Input
+                props="email"
+                functionHandling={functionHandling}
+                value=""
+              ></Input>
+            </div>
+          </>
+        )}
       </div>
     </>
   )
