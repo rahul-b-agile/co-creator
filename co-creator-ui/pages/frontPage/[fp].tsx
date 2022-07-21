@@ -1,15 +1,25 @@
 import type { NextPage, GetStaticProps } from 'next'
 
-import Skill from '../components/Skill/Skill'
-import ProjectType from '../components/ProjectType/ProjectType'
-import Duration from '../components/Duration/Duration'
-import WorkingModel from '../components/WorkingModel/WorkingModel'
-import Experience from '../components/Experience/Experience'
+import Skill from '../../components/Skill/Skill'
+import ProjectType from '../../components/ProjectType/ProjectType'
+import Duration from '../../components/Duration/Duration'
+import WorkingModel from '../../components/WorkingModel/WorkingModel'
+import Experience from '../../components/Experience/Experience'
 import { useContext, useState } from 'react'
-import Button from '../components/Widgets/Button/Button'
-import { Context1 } from './context'
-import Router from 'next/router'
-import functionCall from '../components/Functions/function'
+import Button from '../../components/Widgets/Button/Button'
+import { Context1 } from '../context'
+import { useRouter } from 'next/router'
+import Verification_popup from '../../components/Verification_popup/Verification_popup'
+import ContactPage from '../../components/ContactPage/ContactPage'
+
+var generator = require('generate-password')
+
+export const getStaticPaths: GetStaticPaths<{ slug: string }> = async () => {
+  return {
+    paths: [], //indicates that no page needs be created at build time
+    fallback: 'blocking', //indicates the type of fallback
+  }
+}
 
 // Getting first API data using function Call(skills)
 const getSkillData = async () => {
@@ -100,17 +110,27 @@ export const getStaticProps: GetStaticProps = async () => {
 
 // Home page to Display all the records in Single page
 const Home: NextPage = ({ fullData }: any) => {
+  const Router = useRouter()
+  console.log(Router.query.fp)
+  var a = Router.query.fp
+
   const [particularData, setParticularData] = useState<number>(0)
 
   const value: any = useContext(Context1)
   console.log(value, 'provider value')
 
   const [skillData, setSkillData] = useState({
-    // skillType: value.skillPage.skillName,
+    skillType: a,
     name: '',
     email: '',
   })
 
+  const [password, setPassword] = useState<any>('')
+  const [popup, setpopup] = useState<boolean>(false)
+  const [dataCarrier, setDataCarrier] = useState('')
+  const handleClose = () => {
+    setpopup(false)
+  }
   const [content, setContent] = useState({
     skillData: skillData,
     projectTypeData: [],
@@ -188,17 +208,47 @@ const Home: NextPage = ({ fullData }: any) => {
   const data = fullData[1]
 
   // Function for forward navigation in single page
-  const handleFunction = (e: any) => {
+  const handleFunction = async (e: any) => {
     //function handling and saving data in context for particularData=0
     if (particularData == 0) {
+      //password Generator after click on Continue in first page
+      var password1 = generator.generate({
+        length: 10,
+        numbers: true,
+      })
+      setPassword(password1)
+      console.log(password)
+      const response = await fetch(
+        'http://ec2-52-42-247-15.us-west-2.compute.amazonaws.com:1337/api/auth/local/register',
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            username: skillData.name,
+            email: skillData.email,
+            password: password,
+          }),
+        }
+      )
+
+      if (response.status >= 200 && response.status <= 299) {
+        const jsonResponse = await response.json()
+        setDataCarrier(jsonResponse.user)
+        fetchdata(jsonResponse)
+      } else {
+        // Handle errors
+        console.log(response.status, response.statusText)
+      }
       setContent({ ...content, skillData: skillData })
       value.setUserObject({ ...value.UserObject, SkillData: content })
-      setParticularData(particularData + 1)
       // alert('skillData')
-      // Router.push('/login')
+      // setParticularData(particularData + 1)
+      // Router.push('/angular')
     } else {
       //Rest of the content execution done here (particular Date=1,2,3)
-      if (particularData < 4) {
+      if (particularData <= 4) {
         value.setUserObject({ ...value.UserObject, Skillpage: content })
         setParticularData(particularData + 1)
       } else {
@@ -219,14 +269,35 @@ const Home: NextPage = ({ fullData }: any) => {
     Router.push('/')
   }
 
-  //value for the Footer component
+  //Fetch Data for Confirmation Mail
+  const fetchdata = async (jsonResponse: any) => {
+    console.log(jsonResponse.user.email)
+    const response = await fetch(
+      'http://ec2-52-42-247-15.us-west-2.compute.amazonaws.com:1337/api/auth/forgot-password',
+      {
+        method: 'POST',
+        headers: { 'Content-type': 'application/json' },
+        body: JSON.stringify({ email: jsonResponse.user.email }),
+      }
+    )
+    if (response.ok == true) {
+      setpopup(true)
+      console.log('verificaiton sent')
+    } else {
+      console.log('error in forgot password')
+    }
+  }
 
   return (
     <div>
       {/* Rendering Data by giving Id to the component so that navigation is in possible way */}
 
       {particularData == 0 && (
-        <Skill data={fullData[0]} functionHandling={handleChange} />
+        <Skill
+          data={fullData[0]}
+          paramsData={a}
+          functionHandling={handleChange}
+        />
       )}
       {particularData == 1 && (
         <ProjectType
@@ -256,25 +327,34 @@ const Home: NextPage = ({ fullData }: any) => {
           functionHandling={handleChange}
         />
       )}
+      {particularData == 5 && <ContactPage />}
 
-      <div className="w-5/6 m-auto flex mt-5">
-        {/* Footer component reusable component for the button in the bottom */}
+      <Verification_popup
+        onClose={handleClose}
+        visible={popup}
+        dataCarrier={dataCarrier}
+      />
 
-        <Button
-          value="Cancel"
-          name="disabled"
-          path="/"
-          func={cancelFunction}
-          textForm=""
-        />
-        <Button
-          value="Continue"
-          name="blue"
-          path=""
-          func={handleFunction}
-          textForm=""
-        />
-      </div>
+      {particularData !== 5 && (
+        <div className="w-5/6 m-auto flex mt-5">
+          {/* Footer component reusable component for the button in the bottom */}
+
+          <Button
+            value="Cancel"
+            name="disabled"
+            path="/"
+            func={cancelFunction}
+            textForm=""
+          />
+          <Button
+            value="Continue"
+            name="blue"
+            path=""
+            func={handleFunction}
+            textForm=""
+          />
+        </div>
+      )}
     </div>
   )
 }

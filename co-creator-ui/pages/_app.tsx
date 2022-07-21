@@ -8,29 +8,28 @@ import { useState } from 'react'
 function MyApp({ Component, pageProps }: any) {
   const [userObject, setUserObject] = useState({
     SkillPage: {},
-   
-    
-
   })
   const [userObject1, setUserObject1] = useState()
   return (
     <div>
-    
+      <Head>
+        <link
+          rel="stylesheet"
+          href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@40,400,1,200"
+        />
+      </Head>
 
-   
       <Layout>
         <Context1.Provider
           value={{
             userObject: userObject,
             setUserObject: setUserObject,
-           
-          }} value1={ {userObject1:userObject1,
-            setUserObject1:setUserObject1}}
+          }}
+          value1={{ userObject1: userObject1, setUserObject1: setUserObject1 }}
         >
           <Component {...pageProps} />
         </Context1.Provider>
       </Layout>
-     
     </div>
   )
 }

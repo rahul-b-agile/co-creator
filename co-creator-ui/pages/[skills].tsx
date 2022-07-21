@@ -1,7 +1,6 @@
 import { GetStaticPaths } from 'next'
 import { useRouter } from 'next/router'
 import React, { useState, useEffect } from 'react'
-import Navbar from '../components/ProfileNavbar/ProfileNavbar'
 import Header from '../components/Header/Header'
 import Cards from '../components/ProfileCards/ProfileCards'
 import SelectedProfile from '../components/SelectedProfile/SelectedProfile'
@@ -13,7 +12,9 @@ export const getStaticPaths: GetStaticPaths<{ slug: string }> = async () => {
 }
 
 export const getProfile = async () => {
-  const res = await fetch('http://localhost:1337/api/profiles?populate=*')
+  const res = await fetch(
+    'http://ec2-52-42-247-15.us-west-2.compute.amazonaws.com:1337/api/profiles?populate=*'
+  )
   const data1 = await res.json()
   console.log(data1)
 
@@ -27,7 +28,9 @@ export const getStaticProps = async () => {
   var profile = await getProfile()
   total.push(profile)
 
-  const res = await fetch('http://localhost:1337/api/contents?populate=*')
+  const res = await fetch(
+    'http://ec2-52-42-247-15.us-west-2.compute.amazonaws.com:1337/api/contents?populate=*'
+  )
   const data = await res.json()
   console.log(data)
   total.push(data)
@@ -108,11 +111,7 @@ const Navigate = ({ data }: any) => {
           {/* <Navbar></Navbar> */}
 
           <>
-            {result.length == 1 ? (
-              <Header result={result}></Header>
-            ) : (
-             null
-            )}
+            {result.length == 1 ? <Header result={result}></Header> : null}
 
             <div className="col-span-3 mt-3 ">
               <div className="grid grid-cols-12 ml-[5%] m5-[5%]">

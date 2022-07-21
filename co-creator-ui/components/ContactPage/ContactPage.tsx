@@ -8,57 +8,80 @@ import 'react-datepicker/dist/react-datepicker.css'
 export default function ContactPage() {
   const [selectedTimezone, setSelectedTimezone] = useState('')
   const [selectedDate, setSelectedDate] = useState(null)
-  const [value, setValue] = useState('sdkf')
+  const [value, setValue] = useState()
   const [time, setTime] = useState('10:00')
+  console.log(value)
   return (
     <div>
-      <div className="w-3/6 mx-auto">
-        <p> Let's get Started What's the best way for us to reach you?</p>
-        <div>
-          <PhoneInput
-            specialLabel={''}
-            country={'th'}
-            value={value}
-            onChange={(phone) => {
-              console.log()
-              setValue(phone)
-            }}
-            inputStyle={{
-              width: '100%',
-            }}
-          />
-        </div>
+      <div className="w-4/5 mx-auto">
+        <div className="my-10 flex  justify-between">
+          <div className="text-blue-500 text-2xl font-bold flex-none w-2/4   ">
+            Let's get Started!
+          </div>
+          <div className="mr-72">
+            <div className="flex">
+              <button
+                onClick={() => {
+                  functionDef(data)
+                }}
+              >
+                <span className="material-symbols-outlined text-gray-400 text-2xl rotate-180">
+                  play_arrow
+                </span>
+              </button>
 
-        <p>When would you like to connect?</p>
-        <div>
-          <DatePicker
-            selected={selectedDate}
-            onChange={(date: any) => setSelectedDate(date)}
-            placeholderText={'Today'}
-            className="border border-[1] border-gray-300 py-1 w-full my-2 rounded"
-          />
+              <div className="border-2 flex-none px-3 py-1 rounded-full text-gray-400">
+                Step6/6
+              </div>
+            </div>
+          </div>
         </div>
+        <div className="w-2/6">
+          <div className="mb-10">
+            would you like to connect with us for discussion? If yes please fill
+            the below details
+          </div>
+          <div className="my-2">
+            <PhoneInput
+              specialLabel={''}
+              country={'us'}
+              value={value}
+              onChange={setValue}
+              searchPlaceholder="Phone Number"
+              placeholder="Phone Number"
+              inputStyle={{
+                width: '100%',
+              }}
+            />
+          </div>
 
-        <div>
-          <TimezoneSelect
-            value={selectedTimezone}
-            onChange={() => setSelectedTimezone(selectedTimezone)}
-            timezones={{
-              ...allTimezones,
-              'America/Lima': 'Pittsburgh',
-              'Europe/Berlin': 'Frankfurt',
-            }}
-          />
-        </div>
-        <div>{/* <TimePicker /> */}</div>
-        <div className="text-center">
-          <button className="bg-blue-500 text-white py-2 rounded px-10 mt-3">
-            {' '}
-            Request a Call
-          </button>
-        </div>
-        <div className="text-blue-500">
-          <a>Skip for now. I'd like to learn more before proceeding</a>
+          <div className="my-2">
+            <div className="text-xs text-gray-500">
+              {' '}
+              Select Date and time to discuss
+            </div>
+            <div>
+              <DatePicker
+                selected={selectedDate}
+                onChange={(date: any) => setSelectedDate(date)}
+                placeholderText={selectedDate}
+                showTimeSelect
+                dateFormat="Pp"
+                className="border border-[1] border-gray-400 py-1 w-full my-2 rounded"
+              />
+            </div>
+          </div>
+
+          <div className="border border-blue-400 text-center bg-blue-600 text-white w-3/5 p-1 rounded my-2">
+            <button>Request a call</button>
+          </div>
+
+          <div className="text-gray-400 my-6">(OR)</div>
+
+          <div>I'd like to explore</div>
+          <div className="text-blue-500 text-xs">
+            <a>Skip for now</a>
+          </div>
         </div>
       </div>
     </div>
